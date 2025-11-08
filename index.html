@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-scale=1.0">
+    <title>PKNS Selangor International Ride 2025</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Configure Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        /* Custom Styles for the 'Selangor' Vibe */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Light mode only: bg-gray-50 and dark text */
+            @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+        }
+
+        /* Glassmorphism Card Effect */
+        .glass-card {
+            @apply rounded-3xl border;
+            @apply bg-white/90; /* Opaque white card */
+            @apply backdrop-blur-lg;
+            @apply border-gray-200;
+        }
+        
+        /* Gradient Text (Red/Yellow) - Stays the same */
+        .gradient-text {
+            background: linear-gradient(to right, #FFD700, #DC2626); /* Yellow to Red */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Primary Call-to-Action Button (Red/Yellow) */
+        .cta-button {
+            background: linear-gradient(to right, #FFD700, #F59E0B, #DC2626); /* Yellow -> Orange -> Red */
+            background-size: 200% auto;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            @apply text-black; /* Dark text for bright button */
+        }
+        
+        .cta-button:hover {
+            background-position: right center; /* Change gradient direction */
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        /* Subtle Gradient Border for Cards (Red/Yellow) */
+        .gradient-border-card {
+            position: relative;
+            @apply bg-white; /* Plain white card */
+            border-radius: 1rem; /* 16px */
+            overflow: hidden;
+            padding: 1.5rem; /* 24px */
+        }
+        
+        .gradient-border-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 1rem;
+            padding: 1px; /* The border thickness */
+            background: linear-gradient(to bottom, rgba(255, 215, 0, 0.3), rgba(220, 38, 38, 0.1)); /* Yellow to Red */
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+        }
+
+        /* Custom styles for language dropdown */
+        #lang-dropdown {
+            @apply absolute right-0 top-10 mt-2 w-28;
+            @apply glass-card p-2 rounded-xl shadow-lg;
+        }
+        #lang-dropdown button {
+            @apply block w-full text-left px-3 py-1.5 rounded-lg;
+            @apply text-gray-700;
+            @apply hover:bg-gray-200/50;
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden">
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto max-w-6xl px-6 py-4 flex justify-between items-center">
+            <!-- Logo / Event Name -->
+            <a href="#" class="text-2xl font-bold text-gray-900">
+                PKNS Selangor<span class="gradient-text">Ride</span>
+            </a>
+            
+            <!-- Nav Links (Desktop) -->
+            <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                <a href="#about" class="text-gray-700 hover:text-black transition-colors" data-lang-key="navAbout">About</a>
+                <a href="#categories" class="text-gray-700 hover:text-black transition-colors" data-lang-key="navCategories">Categories</a>
+                <a href="#highlights" class="text-gray-700 hover:text-black transition-colors" data-lang-key="navEntitlements">Entitlements</a>
+                <a href="#support" class="text-gray-700 hover:text-black transition-colors" data-lang-key="navSupport">Support</a>
+                <a href="#training" class="text-gray-700 hover:text-black transition-colors" data-lang-key="navTraining">Training</a>
+                <a href="#schedule" class="text-gray-700 hover:text-black transition-colors" data-lang-key="navSchedule">Schedule</a>
+            </div>
+            
+            <!-- Controls (Desktop) -->
+            <div class="hidden md:flex items-center space-x-4">
+                <!-- Language Selector -->
+                <div class="relative">
+                    <button id="lang-btn" class="flex items-center gap-1 text-gray-700 hover:text-black transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l-5.25-5.25h10.5L10.5 21zM5.25 10.5c0 3.13 2.58 5.7 5.25 5.7s5.25-2.57 5.25-5.7H5.25zM3.75 6C3.75 4.76 4.76 3.75 6 3.75h9c1.24 0 2.25 1.01 2.25 2.25v.75H3.75V6z" />
+                        </svg>
+                        <span id="lang-btn-text">EN</span>
+                    </button>
+                    <div id="lang-dropdown" class="hidden">
+                        <button data-lang="en">English</button>
+                        <button data-lang="ms">Bahasa</button>
+                    </div>
+                </div>
+
+                <!-- CTA (Desktop) - REMOVED
+                <a href="#register" class="bg-gray-800/10 text-gray-800 text-sm font-medium py-2 px-5 rounded-full border border-gray-800/20 hover:bg-gray-800/20 transition-all" onclick="openModal('registerModal')" data-lang-key="registerNow">
+                    Register Now
+                </a>
+                -->
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-800" aria-label="Open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden glass-card mx-4 rounded-xl shadow-xl">
+            <a href="#about" class="block py-3 px-5 text-gray-700 hover:bg-black/5" data-lang-key="navAbout">About</a>
+            <a href="#categories" class="block py-3 px-5 text-gray-700 hover:bg-black/5" data-lang-key="navCategories">Categories</a>
+            <a href="#highlights" class="block py-3 px-5 text-gray-700 hover:bg-black/5" data-lang-key="navEntitlements">Entitlements</a>
+            <a href="#support" class="block py-3 px-5 text-gray-700 hover:bg-black/5" data-lang-key="navSupport">Support</a>
+            <a href="#training" class="block py-3 px-5 text-gray-700 hover:bg-black/5" data-lang-key="navTraining">Training</a>
+            <a href="#schedule" class="block py-3 px-5 text-gray-700 hover:bg-black/5" data-lang-key="navSchedule">Schedule</a>
+            
+            <!-- Mobile Controls -->
+            <div class="flex justify-between items-center p-3 border-t border-gray-200/80 mt-2">
+                <!-- Language Selector -->
+                <div class="relative">
+                    <button id="mobile-lang-btn" class="flex items-center gap-1 text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l-5.25-5.25h10.5L10.5 21zM5.25 10.5c0 3.13 2.58 5.7 5.25 5.7s5.25-2.57 5.25-5.7H5.25zM3.75 6C3.75 4.76 4.76 3.75 6 3.75h9c1.24 0 2.25 1.01 2.25 2.25v.75H3.75V6z" />
+                        </svg>
+                        <span id="mobile-lang-btn-text">EN</span>
+                    </button>
+                    <div id="mobile-lang-dropdown" class="hidden">
+                        <button data-lang="en">English</button>
+                        <button data-lang="ms">Bahasa</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile CTA - REMOVED
+            <a href="#register" class="block py-3 px-5 text-center text-gray-800 bg-gray-800/10 m-3 rounded-full" onclick="openModal('registerModal')" data-lang-key="registerNow">Register Now</a>
+            -->
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10">
+        
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center pt-24 pb-12">
+            <div class="container mx-auto max-w-6xl px-6 text-center">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-6 text-gray-900" data-lang-key="heroTitle">
+                    PKNS Selangor
+                    <br class="hidden md:block">
+                    <span class="gradient-text">International Ride 2025</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-10" data-lang-key="heroSubtitle">
+                    Experience the Thrill. Conquer the Routes of Selangor.
+                </p>
+
+                <!-- Countdown Timer -->
+                <div id="countdown" class="flex justify-center gap-3 md:gap-6 my-10 max-w-lg mx-auto">
+                    <div class="glass-card p-4 md:p-6 w-1/4 rounded-2xl text-center">
+                        <span id="days" class="text-4xl md:text-5xl font-bold gradient-text">00</span>
+                        <span class="block text-sm text-gray-700 mt-1" data-lang-key="countdownDays">Days</span>
+                    </div>
+                    <div class="glass-card p-4 md:p-6 w-1/4 rounded-2xl text-center">
+                        <span id="hours" class="text-4xl md:text-5xl font-bold gradient-text">00</span>
+                        <span class="block text-sm text-gray-700 mt-1" data-lang-key="countdownHours">Hours</span>
+                    </div>
+                    <div class="glass-card p-4 md:p-6 w-1/4 rounded-2xl text-center">
+                        <span id="minutes" class="text-4xl md:text-5xl font-bold gradient-text">00</span>
+                        <span class="block text-sm text-gray-700 mt-1" data-lang-key="countdownMins">Mins</span>
+                    </div>
+                    <div class="glass-card p-4 md:p-6 w-1/4 rounded-2xl text-center">
+                        <span id="seconds" class="text-4xl md:text-5xl font-bold gradient-text">00</span>
+                        <span class="block text-sm text-gray-700 mt-1" data-lang-key="countdownSecs">Secs</span>
+                    </div>
+                </div>
+                
+                <!-- Event Details -->
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 mb-12">
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-yellow-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>
+                        <span class="text-lg text-gray-800" data-lang-key="eventDate">14 December 2025</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <span class="text-lg text-gray-800" data-lang-key="eventVenue">PKNS Sales Gallery, Cyber Valley, Cyberjaya</span>
+                    </div>
+                </div>
+
+                <!-- Hero CTA - REMOVED
+                <button class="cta-button font-bold text-lg py-4 px-10 rounded-full shadow-lg" onclick="openModal('registerModal')" data-lang-key="heroCta">
+                    Book Your Slot
+                </button>
+                -->
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="glass-card p-8 md:p-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                        <span data-lang-key="aboutTitle">About the</span> <span class="gradient-text" data-lang-key="aboutTitleRide">Ride</span>
+                    </h2>
+                    <p class="text-lg text-gray-700 mb-4" data-lang-key="aboutDesc1">
+                        The Selangor International Ride (SIR) 2025 is the premier cycling event in the region, offering a world-class experience on fully closed roads. We are bridging the gap between amateur passion and professional racing.
+                    </p>
+                    <p class="text-lg text-gray-700" data-lang-key="aboutDesc2">
+                        Explore stunning routes, from scenic flats to challenging climbs, all with pro-level support. Join thousands of riders for an unforgettable day of cycling, community, and personal achievement.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="gradient-border-card text-center">
+                        <span class="text-5xl font-extrabold gradient-text">88<span class="text-3xl">km</span></span>
+                        <p class="text-gray-700 mt-2" data-lang-key="statRide1">Fellowship Ride</p>
+                    </div>
+                    <div class="gradient-border-card text-center">
+                        <span class="text-5xl font-extrabold gradient-text">25<span class="text-3xl">km</span></span>
+                        <p class="text-gray-700 mt-2" data-lang-key="statRide2">Fun Ride</p>
+                    </div>
+                    <div class="gradient-border-card text-center">
+                        <span class="text-5xl font-extrabold gradient-text">15<span class="text-3xl">+</span></span>
+                        <p class="text-gray-700 mt-2" data-lang-key="statAge">Minimum Age</p>
+                    </div>
+                    <div class="gradient-border-card text-center">
+                        <span class="text-5xl font-extrabold gradient-text" data-lang-key="statSupportVal">Pro</span>
+                        <p class="text-gray-700 mt-2" data-lang-key="statSupport">Convoy Support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section (From Registration Fees) -->
+        <section id="categories" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-5xl px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">
+                    <span data-lang-key="catTitle">Registration</span> <span class="gradient-text" data-lang-key="catTitleCats">Categories</span>
+                </h2>
+                <div class="glass-card p-6 md:p-10">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="border-b border-yellow-400/20">
+                                    <th class="py-4 pr-4 text-xl font-semibold text-gray-900" data-lang-key="catTableCat">Category</th>
+                                    <th class="py-4 px-4 text-xl font-semibold text-gray-900" data-lang-key="catTableDist">Distance</th>
+                                    <th class="py-4 px-4 text-xl font-semibold text-red-400" data-lang-key="catTableEarly">Early Bird <br><span class="text-sm font-normal text-gray-700" data-lang-key="catTableEarlyDate">(14 Jul - 29 Aug)</span></th>
+                                    <th class="py-4 px-4 text-xl font-semibold text-yellow-400" data-lang-key="catTableNormal">Normal <br><span class="text-sm font-normal text-gray-700" data-lang-key="catTableNormalDate">(30 Aug - 14 Oct)</span></th>
+                                    <th class="py-4 pl-4 text-xl font-semibold text-gray-700" data-lang-key="catTableLate">Late <br><span class="text-sm font-normal text-gray-700" data-lang-key="catTableLateDate">(15 Oct - 14 Nov)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-black/10">
+                                    <td class="py-5 pr-4 text-lg font-medium text-gray-900" data-lang-key="catRide1Name">Fellowship Ride</td>
+                                    <td class="py-5 px-4 text-lg text-gray-700">88 KM</td>
+                                    <td class="py-5 px-4 text-lg font-bold text-red-400">RM 78.00</td>
+                                    <td class="py-5 px-4 text-lg font-bold text-yellow-400">RM 88.00</td>
+                                    <td class="py-5 pl-4 text-lg font-bold text-gray-700">RM 98.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-5 pr-4 text-lg font-medium text-gray-900" data-lang-key="catRide2Name">Fun Ride</td>
+                                    <td class="py-5 px-4 text-lg text-gray-700">25 KM</td>
+                                    <td class="py-5 px-4 text-lg font-bold text-red-400">RM 50.00</td>
+                                    <td class="py-5 px-4 text-lg font-bold text-yellow-400" data-lang-key="catLimited">LIMITED</td>
+                                    <td class="py-5 pl-4 text-lg font-bold text-gray-700" data-lang-key="catLimited">LIMITED</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-sm text-gray-700 mt-6" data-lang-key="catFeeNote">*Price is inclusive of 8% online payment gateway fee.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Highlights / Entitlements Section -->
+        <section id="highlights" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-6xl px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">
+                    <span data-lang-key="entTitle">Rider</span> <span class="gradient-text" data-lang-key="entTitleEnt">Entitlements</span>
+                </h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <!-- Highlight Card -->
+                    <div class="glass-card text-center p-6 group">
+                        <div class="w-36 h-36 rounded-full mx-auto mb-4 border-2 border-yellow-400/50 group-hover:border-yellow-400 transition-all duration-300 group-hover:scale-105 flex items-center justify-center">
+                            <!-- SVG for Jersey -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-yellow-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.502 22.14H19.5a2.25 2.25 0 0 0 2.25-2.25v-9.58a2.25 2.25 0 0 0-1.28-2.05l-7.5-4.33a2.25 2.25 0 0 0-2.44 0l-7.5 4.33A2.25 2.25 0 0 0 2.25 10.31v9.58a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25l1.5 1.5 3-3 1.5 1.5" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1" data-lang-key="entJersey">Event Jersey</h3>
+                        <p class="text-yellow-500 text-sm" data-lang-key="entJerseyDesc">High-quality race apparel</p>
+                    </div>
+                    <!-- Highlight Card -->
+                    <div class="glass-card text-center p-6 group">
+                        <div class="w-36 h-36 rounded-full mx-auto mb-4 border-2 border-red-400/50 group-hover:border-red-400 transition-all duration-300 group-hover:scale-105 flex items-center justify-center">
+                            <!-- SVG for Medal -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-red-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9.75 9.75 0 1 0 0-13.5h9a9.75 9.75 0 1 0 0 13.5Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1" data-lang-key="entMedal">Finisher Medal</h3>
+                        <p class="text-red-500 text-sm" data-lang-key="entMedalDesc">A unique, high-quality reward</p>
+                    </div>
+                    <!-- Highlight Card -->
+                    <div class="glass-card text-center p-6 group">
+                        <div class="w-36 h-36 rounded-full mx-auto mb-4 border-2 border-gray-400/50 group-hover:border-gray-400 transition-all duration-300 group-hover:scale-105 flex items-center justify-center">
+                             <!-- SVG for T-Shirt -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-gray-700">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.617 3.265a.75.75 0 0 1-.768 0l-7.617-3.265a.75.75 0 0 1-.41-.663V7.532a.75.75 0 0 1 .41-.663l7.617-3.265a.75.75 0 0 1 .768 0l7.617 3.265a.75.75 0 0 1 .41.663v4.544a.75.75 0 0 1-.41.663z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 12.319V17.25" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 7.532l7.617 3.265 7.617-3.265" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3.681L4.383 7.532" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1" data-lang-key="entTshirt">Finisher T-Shirt</h3>
+                        <p class="text-gray-600 text-sm" data-lang-key="entTshirtDesc">Exclusive event merchandise</p>
+                    </div>
+                    <!-- Highlight Card -->
+                    <div class="glass-card text-center p-6 group">
+                        <div class="w-36 h-36 rounded-full mx-auto mb-4 border-2 border-yellow-400/50 group-hover:border-yellow-400 transition-all duration-300 group-hover:scale-105 flex items-center justify-center">
+                             <!-- SVG for Bag -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-yellow-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.55a1.125 1.125 0 0 1-1.12-1.243l1.263-12A1.125 1.125 0 0 1 5.78 7.5h12.44c.58 0 1.069.433 1.135 1.007Z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1" data-lang-key="entBag">Drawstring Bag</h3>
+                        <p class="text-yellow-500 text-sm" data-lang-key="entBagDesc">Official event bag</p>
+                    </div>
+                    <!-- Highlight Card -->
+                    <div class="glass-card text-center p-6 group">
+                        <div class="w-36 h-36 rounded-full mx-auto mb-4 border-2 border-red-400/50 group-hover:border-red-400 transition-all duration-300 group-hover:scale-105 flex items-center justify-center">
+                             <!-- SVG for Bib -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-red-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6.75c0 1.242-.8 2.25-1.75 2.25H9.25C8.3 9 7.5 7.992 7.5 6.75s.8-2.25 1.75-2.25h5.5C15.7 4.5 16.5 5.508 16.5 6.75z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 19.5H6a2.25 2.25 0 0 1-2.25-2.25V9A2.25 2.25 0 0 1 6 6.75h12A2.25 2.25 0 0 1 20.25 9v8.25A2.25 2.25 0 0 1 18 19.5z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1" data-lang-key="entBib">Race Bib</h3>
+                        <p class="text-red-500 text-sm" data-lang-key="entBibDesc">Personalized number plate</p>
+                    </div>
+                    <!-- Highlight Card -->
+                    <div class="glass-card text-center p-6 group">
+                        <div class="w-36 h-36 rounded-full mx-auto mb-4 border-2 border-gray-400/50 group-hover:border-gray-400 transition-all duration-300 group-hover:scale-105 flex items-center justify-center">
+                             <!-- SVG for Certificate -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-gray-700">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125V6a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.318c.868.142 1.75.216 2.623.216C17.88 16.5 21 13.404 21 9.75S17.88 3 14.25 3C12.394 3 10.71 3.832 9.45 5.137m-3.911 8.121a5.25 5.25 0 0 0-1.112.917C4.26 15.082 2.25 17.226 2.25 19.5c0 1.141.63 2.18 1.528 2.747A8.25 8.25 0 0 0 8.25 21c.67 0 1.31-.097 1.903-.284" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1" data-lang-key="entCert">E-Certificate</h3>
+                        <p class="text-gray-600 text-sm" data-lang-key="entCertDesc">Downloadable achievement</p>
+                    </div>
+                    <!-- Highlight Card -->
+                    <div class="glass-card text-center p-6 group">
+                        <div class="w-36 h-36 rounded-full mx-auto mb-4 border-2 border-yellow-400/50 group-hover:border-yellow-400 transition-all duration-300 group-hover:scale-105 flex items-center justify-center">
+                             <!-- SVG for Food -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-yellow-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 12.75c0 1.243-.37 2.45-1.055 3.495-.684 1.044-1.625 1.88-2.69 2.505-1.065.625-2.26.9-3.48.9s-2.415-.275-3.48-.9c-1.065-.625-2.006-1.46-2.69-2.505C7.62 15.2 7.25 14 7.25 12.75" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.75c1.13 0 2.23-.21 3.255-.63M4.2 9.75A9.75 9.75 0 0 1 12 4.5c4.03 0 7.47 2.46 9 5.82-1.53 3.36-4.97 5.82-9 5.82a17.7 17.7 0 0 1-5.06-.81" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1" data-lang-key="entRefresh">Refreshments</h3>
+                        <p class="text-yellow-500 text-sm" data-lang-key="entRefreshDesc">Light food & drinks</p>
+                    </div>
+                    <!-- Highlight Card -->
+                    <div class="glass-card text-center p-6 group">
+                        <div class="w-36 h-36 rounded-full mx-auto mb-4 border-2 border-yellow-400/50 group-hover:border-yellow-400 transition-all duration-300 group-hover:scale-105 flex items-center justify-center">
+                             <!-- SVG for Insurance/Safety -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-yellow-300">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623 0-1.631-.46-3.16-1.28-4.51M12 2.25A11.959 11.959 0 0 1 14.402 6M12 2.25A11.959 11.959 0 0 0 9.598 6" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1" data-lang-key="entInsurance">Rider Insurance</h3>
+                        <p class="text-yellow-500 text-sm" data-lang-key="entInsuranceDesc">Personal accident coverage</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro-Level Support Section (NEW) -->
+        <section id="support" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="glass-card p-8 md:p-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                        <span data-lang-key="supportTitle">Ride Like a Pro:</span> <span class="gradient-text" data-lang-key="supportTitleConvoy">Full Convoy</span>
+                    </h2>
+                    <p class="text-lg text-gray-700 mb-6" data-lang-key="supportDesc">
+                        This isn't just a ride; it's a professionally managed event. The 88KM Fellowship Ride will be fully escorted by a state-level convoy to ensure your safety and provide a seamless experience, just like the pros.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-yellow-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd" /></svg><span data-lang-key="supportItem1">40 Police Motorbikes & Lead Cars</span></li>
+                        <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-yellow-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd" /></svg><span data-lang-key="supportItem2">20 Lead Marshall (Superbikes)</span></li>
+                        <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-yellow-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd" /></svg><span data-lang-key="supportItem3">40 Marshall Motorbikes</span></li>
+                        <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-yellow-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd" /></svg><span data-lang-key="supportItem4">10 Mobile Medic Teams & 4 Ambulances</span></li>
+                        <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-yellow-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd" /></svg><span data-lang-key="supportItem5">2 Natural Service (Mechanic) Vehicles</span></li>
+                        <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-yellow-400"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.707-9.293a1 1 0 0 0-1.414-1.414L9 10.586 7.707 9.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd" /></svg><span data-lang-key="supportItem6">10 Pickup Broom Vehicles</span></li>
+                    </ul>
+                </div>
+                <div class="glass-card p-8 md:p-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                        <span data-lang-key="bikesTitle">Suitable</span> <span class="gradient-text" data-lang-key="bikesTitleBikes">Bicycles</span>
+                    </h2>
+                    <p class="text-lg text-gray-700 mb-8" data-lang-key="bikesDesc">
+                        All bicycle types are welcome! Just ensure your bike is in good working condition. Minimum age to ride is 15 years and above.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center">
+                        <div class="gradient-border-card !p-4"><span class="text-gray-800" data-lang-key="bike1">Mountain Bike</span></div>
+                        <div class="gradient-border-card !p-4"><span class="text-gray-800" data-lang-key="bike2">Road Bike</span></div>
+                        <div class="gradient-border-card !p-4"><span class="text-gray-800" data-lang-key="bike3">City / Cruiser</span></div>
+                        <div class="gradient-border-card !p-4"><span class="text-gray-800" data-lang-key="bike4">Touring Bike</span></div>
+                        <div class="gradient-border-card !p-4"><span class="text-gray-800" data-lang-key="bike5">Electric Bicycle</span></div>
+                        <div class="gradient-border-card !p-4"><span class="text-gray-800" data-lang-key="bike6">Folding Bike</span></div>
+                        <div class="gradient-border-card !p-4"><span class="text-gray-800" data-lang-key="bike7">Tandem Bicycle</span></div>
+                        <div class="gradient-border-card !p-4"><span class="text-gray-800" data-lang-key="bike8">Fat Bike</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW Training & Nutrition Section -->
+        <section id="training" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-6xl px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">
+                    <span data-lang-key="trainingTitle">Get</span> <span class="gradient-text" data-lang-key="trainingTitleReady">Ready</span>
+                </h2>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- 25km Card -->
+                    <div class="glass-card p-8 md:p-10">
+                        <h3 class="text-3xl font-bold mb-6 text-gray-900" data-lang-key="training25kmTitle">
+                            25km Fun Ride
+                        </h3>
+                        
+                        <h4 class="text-xl font-semibold text-yellow-500 mb-3" data-lang-key="trainingSubTraining">Training Tips</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li data-lang-key="training25kmTip1"><strong>Consistency > Intensity:</strong> Aim for 2-3 short rides (30-45 mins) per week.</li>
+                            <li data-lang-key="training25kmTip2"><strong>Practice Handling:</strong> Get comfortable with starting, stopping, and turning.</li>
+                            <li data-lang-key="training25kmTip3"><strong>Go the Distance (Once):</strong> Try one longer ride of 15-20km a week before the event.</li>
+                        </ul>
+
+                        <h4 class="text-xl font-semibold text-red-400 mb-3 mt-8" data-lang-key="trainingSubNutrition">Nutrition Guide</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li data-lang-key="training25kmNutri1"><strong>Hydrate:</strong> Drink water before and during the ride. A single bottle is fine.</li>
+                            <li data-lang-key="training25kmNutri2"><strong>Light Breakfast:</strong> Eat a simple breakfast (e.g., toast, banana) 1-2 hours before.</li>
+                            <li data-lang-key="training25kmNutri3"><strong>Post-Ride:</strong> Have a small snack with protein and carbs after.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 88km Card -->
+                    <div class="glass-card p-8 md:p-10">
+                        <h3 class="text-3xl font-bold mb-6 text-gray-900" data-lang-key="training88kmTitle">
+                            88km Fellowship Ride
+                        </h3>
+                        
+                        <h4 class="text-xl font-semibold text-yellow-500 mb-3" data-lang-key="trainingSubTraining">Training Tips</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li data-lang-key="training88kmTip1"><strong>Build Endurance:</strong> Aim for 3-4 rides per week, focusing on "saddle time".</li>
+                            <li data-lang-key="training88kmTip2"><strong>The Long Ride:</strong> Gradually increase your weekend ride to 60-70km.</li>
+                            <li data-lang-key="training88kmTip3"><strong>Pacing is Key:</strong> Practice riding at a steady, sustainable pace. Don't start too fast.</li>
+                            <li data-lang-key="training88kmTip4"><strong>Hill Practice:</strong> Include some small hills in your training to build strength.</li>
+                        </ul>
+
+                        <h4 class="text-xl font-semibold text-red-400 mb-3 mt-8" data-lang-key="trainingSubNutrition">Nutrition Guide</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li data-lang-key="training88kmNutri1"><strong>Carb-Load:</strong> Eat a carbohydrate-rich meal (like pasta or rice) the night before.</li>
+                            <li data-lang-key="training88kmNutri2"><strong>On-Bike Fuel:</strong> Bring energy gels, bananas, or energy bars. Eat small amounts every 45-60 mins.</li>
+                            <li data-lang-key="training88kmNutri3"><strong>Electrolytes:</strong> Use sports drinks with electrolytes, not just plain water.</li>
+                            <li data-lang-key="training88kmNutri4"><strong>Recovery Meal:</strong> Have a meal rich in protein and carbs within 90 minutes after finishing.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-4xl px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">
+                    <span data-lang-key="scheduleTitle">Race Day</span> <span class="gradient-text" data-lang-key="scheduleTitleSched">Schedule</span>
+                </h2>
+                <div class="glass-card p-6 md:p-10">
+                    <!-- Day 1 -->
+                    <h3 class="text-2xl font-bold text-yellow-500 mb-6" data-lang-key="scheduleSubtitle1">Race Kit Collection</h3>
+                    <div class="space-y-6">
+                        <div class="gradient-border-card !p-5 flex flex-col md:flex-row justify-between">
+                            <span class="text-lg font-semibold text-red-400 mb-2 md:mb-0" data-lang-key="scheduleRPCDay1">Fri, 12 Dec 2025</span>
+                            <span class="text-lg text-gray-800 font-medium flex-1 md:mx-6">10:00 AM - 06:00 PM</span>
+                            <span class="text-gray-700" data-lang-key="eventVenueShort">PKNS Sales Gallery</span>
+                        </div>
+                        <div class="gradient-border-card !p-5 flex flex-col md:flex-row justify-between">
+                            <span class="text-lg font-semibold text-red-400 mb-2 md:mb-0" data-lang-key="scheduleRPCDay2">Sat, 13 Dec 2025</span>
+                            <span class="text-lg text-gray-800 font-medium flex-1 md:mx-6">10:00 AM - 06:00 PM</span>
+                            <span class="text-gray-700" data-lang-key="eventVenueShort">PKNS Sales Gallery</span>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-yellow-500 mt-12 mb-6" data-lang-key="scheduleSubtitle2">Race Day: Sunday, 14 Dec 2025</h3>
+                    <div class="space-y-6">
+                        <div class="gradient-border-card !p-5 flex flex-col md:flex-row justify-between">
+                            <span class="text-lg font-semibold text-red-400 mb-2 md:mb-0">05:00 AM</span>
+                            <span class="text-lg text-gray-800 font-medium flex-1 md:mx-6" data-lang-key="scheduleItem1">Rider Check-in</span>
+                            <span class="text-gray-700" data-lang-key="scheduleLoc1">Main Tent</span>
+                        </div>
+                        <div class="gradient-border-card !p-5 flex flex-col md:flex-row justify-between">
+                            <span class="text-lg font-semibold text-red-400 mb-2 md:mb-0">06:45 AM</span>
+                            <span class="text-lg text-gray-800 font-medium flex-1 md:mx-6" data-lang-key="scheduleItem2">Welcome Speech & Briefing</span>
+                            <span class="text-gray-700" data-lang-key="scheduleLoc2">Starting Line</span>
+                        </div>
+                        <div class="gradient-border-card !p-5 flex flex-col md:flex-row justify-between">
+                            <span class="text-lg font-semibold text-red-400 mb-2 md:mb-0">07:00 AM</span>
+                            <span class="text-lg text-gray-800 font-medium flex-1 md:mx-6" data-lang-key="scheduleItem3">Flag Off</span>
+                            <span class="text-gray-700" data-lang-key="scheduleLoc2">Starting Line</span>
+                        </div>
+                        <div class="gradient-border-card !p-5 flex flex-col md:flex-row justify-between">
+                            <span class="text-lg font-semibold text-red-400 mb-2 md:mb-0">10:30 AM</span>
+                            <span class="text-lg text-gray-800 font-medium flex-1 md:mx-6" data-lang-key="scheduleItem4">First Riders Arrive (Est.)</span>
+                            <span class="text-gray-700" data-lang-key="scheduleLoc3">Finish Line</span>
+                        </div>
+                        <div class="gradient-border-card !p-5 flex flex-col md:flex-row justify-between">
+                            <span class="text-lg font-semibold text-red-400 mb-2 md:mb-0">01:30 PM</span>
+                            <span class="text-lg text-gray-800 font-medium flex-1 md:mx-6" data-lang-key="scheduleItem5">Prize Giving & Lucky Draw</span>
+                            <span class="text-gray-700" data-lang-key="scheduleLoc4">Main Stage</span>
+                        </div>
+                        <div class="gradient-border-card !p-5 flex flex-col md:flex-row justify-between">
+                            <span class="text-lg font-semibold text-red-400 mb-2 md:mb-0">03:00 PM</span>
+                            <span class="text-lg text-gray-800 font-medium flex-1 md:mx-6" data-lang-key="scheduleItem6">Cut-off Time & Event Concludes</span>
+                            <span class="text-gray-700" data-lang-key="scheduleLoc5">Race Village</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-black/10 mt-20">
+        <div class="container mx-auto max-w-6xl px-6 text-center">
+            <a href="https://www.selangorinternationalride2025.com/" target="_blank" rel="noopener noreferrer" class="text-3xl font-bold text-gray-900 mb-4 block">
+                PKNS Selangor<span class="gradient-text">Ride</span>
+            </a>
+            <div class="flex justify-center space-x-6 mb-8">
+                <!-- Example Social Icons -->
+                <a href="https://www.selangorinternationalride2025.com/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-black transition-colors" aria-label="X/Twitter">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.selangorinternationalride2025.com/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-black transition-colors" aria-label="Discord">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.46v19.08c0 1.356-1.104 2.46-2.46 2.46H4.46C3.104 24 2 22.896 2 21.54V2.46C2 1.104 3.104 0 4.46 0h15.08zM8.868 15.168c-1.164 0-2.108-.944-2.108-2.108s.944-2.108 2.108-2.108c1.164 0 2.108.944 2.108 2.108s-.944 2.108-2.108 2.108zm6.264 0c-1.164 0-2.108-.944-2.108-2.108s.944-2.108 2.108-2.108c1.164 0 2.108.944 2.108 2.108s-.944 2.108-2.108 2.108z"/></svg>
+                </a>
+                <a href="https://www.selangorinternationalride2025.com/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-black transition-colors" aria-label="Telegram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.742 9.429l21.218 8.163c.961.371 1.83.056 2.05-.972.22-.988-.501-1.465-1.173-1.83l-5.69-3.085-13.84-8.89c-1.077-.693-2.05.084-1.635 1.48.416 1.397 9.06 29.508 8.89 29.333-.17-.175-12.01-7.79-13.56-8.89-.91-.643-.91-1.61 0-2.16z"/></svg>
+                </a>
+            </div>
+            <p class="text-gray-600 text-sm" data-lang-key="footerRights">©2025 Official Unofficial SIR Fellowship Rider. Vibe coded with Sheikh Al Gemini Al Meruwiyyahi</p>
+        </div>
+    </footer>
+
+
+    <!-- Modal (Hidden by default) - REMOVED
+    <div id="registerModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md hidden" onclick="closeModal('registerModal')">
+        ...
+    </div>
+    -->
+
+
+    <!-- JavaScript -->
+    <script>
+        // --- Content for i18n (Internationalization) ---
+        const content = {
+            'en': {
+                'navAbout': 'About',
+                'navCategories': 'Categories',
+                'navEntitlements': 'Entitlements',
+                'navSupport': 'Support',
+                'navTraining': 'Training',
+                'navSchedule': 'Schedule',
+                'registerNow': 'Register Now',
+                'heroTitle': 'PKNS Selangor<br class="hidden md:block"><span class="gradient-text">International Ride 2025</span>',
+                'heroSubtitle': 'Experience the Thrill. Conquer the Routes of Selangor.',
+                'countdownDays': 'Days',
+                'countdownHours': 'Hours',
+                'countdownMins': 'Mins',
+                'countdownSecs': 'Secs',
+                'eventDate': '14 December 2025',
+                'eventVenue': 'PKNS Sales Gallery, Cyber Valley, Cyberjaya',
+                'heroCta': 'Book Your Slot',
+                'aboutTitle': 'About the',
+                'aboutTitleRide': 'Ride',
+                'aboutDesc1': 'The Selangor International Ride (SIR) 2025 is the premier cycling event in the region, offering a world-class experience on fully closed roads. We are bridging the gap between amateur passion and professional racing.',
+                'aboutDesc2': 'Explore stunning routes, from scenic flats to challenging climbs, all with pro-level support. Join thousands of riders for an unforgettable day of cycling, community, and personal achievement.',
+                'statRide1': 'Fellowship Ride',
+                'statRide2': 'Fun Ride',
+                'statAge': 'Minimum Age',
+                'statSupportVal': 'Pro',
+                'statSupport': 'Convoy Support',
+                'catTitle': 'Registration',
+                'catTitleCats': 'Categories',
+                'catTableCat': 'Category',
+                'catTableDist': 'Distance',
+                'catTableEarly': 'Early Bird',
+                'catTableEarlyDate': '(14 Jul - 29 Aug)',
+                'catTableNormal': 'Normal',
+                'catTableNormalDate': '(30 Aug - 14 Oct)',
+                'catTableLate': 'Late',
+                'catTableLateDate': '(15 Oct - 14 Nov)',
+                'catRide1Name': 'Fellowship Ride',
+                'catRide2Name': 'Fun Ride',
+                'catLimited': 'LIMITED',
+                'catFeeNote': '*Price is inclusive of 8% online payment gateway fee.',
+                'entTitle': 'Rider',
+                'entTitleEnt': 'Entitlements',
+                'entJersey': 'Event Jersey',
+                'entJerseyDesc': 'High-quality race apparel',
+                'entMedal': 'Finisher Medal',
+                'entMedalDesc': 'A unique, high-quality reward',
+                'entTshirt': 'Finisher T-Shirt',
+                'entTshirtDesc': 'Exclusive event merchandise',
+                'entBag': 'Drawstring Bag',
+                'entBagDesc': 'Official event bag',
+                'entBib': 'Race Bib',
+                'entBibDesc': 'Personalized number plate',
+                'entCert': 'E-Certificate',
+                'entCertDesc': 'Downloadable achievement',
+                'entRefresh': 'Refreshments',
+                'entRefreshDesc': 'Light food & drinks',
+                'entInsurance': 'Rider Insurance',
+                'entInsuranceDesc': 'Personal accident coverage',
+                'supportTitle': 'Ride Like a Pro:',
+                'supportTitleConvoy': 'Full Convoy',
+                'supportDesc': "This isn't just a ride; it's a professionally managed event. The 88KM Fellowship Ride will be fully escorted by a state-level convoy to ensure your safety and provide a seamless experience, just like the pros.",
+                'supportItem1': '40 Police Motorbikes & Lead Cars',
+                'supportItem2': '20 Lead Marshall (Superbikes)',
+                'supportItem3': '40 Marshall Motorbikes',
+                'supportItem4': '10 Mobile Medic Teams & 4 Ambulances',
+                'supportItem5': '2 Natural Service (Mechanic) Vehicles',
+                'supportItem6': '10 Pickup Broom Vehicles',
+                'bikesTitle': 'Suitable',
+                'bikesTitleBikes': 'Bicycles',
+                'bikesDesc': 'All bicycle types are welcome! Just ensure your bike is in good working condition. Minimum age to ride is 15 years and above.',
+                'bike1': 'Mountain Bike',
+                'bike2': 'Road Bike',
+                'bike3': 'City / Cruiser',
+                'bike4': 'Touring Bike',
+                'bike5': 'Electric Bicycle',
+                'bike6': 'Folding Bike',
+                'bike7': 'Tandem Bicycle',
+                'bike8': 'Fat Bike',
+                'trainingTitle': 'Get',
+                'trainingTitleReady': 'Ready',
+                'training25kmTitle': '25km Fun Ride',
+                'training88kmTitle': '88km Fellowship Ride',
+                'trainingSubTraining': 'Training Tips',
+                'trainingSubNutrition': 'Nutrition Guide',
+                'training25kmTip1': '<strong>Consistency > Intensity:</strong> Aim for 2-3 short rides (30-45 mins) per week.',
+                'training25kmTip2': '<strong>Practice Handling:</strong> Get comfortable with starting, stopping, and turning.',
+                'training25kmTip3': '<strong>Go the Distance (Once):</strong> Try one longer ride of 15-20km a week before the event.',
+                'training25kmNutri1': '<strong>Hydrate:</strong> Drink water before and during the ride. A single bottle is fine.',
+                'training25kmNutri2': '<strong>Light Breakfast:</strong> Eat a simple breakfast (e.g., toast, banana) 1-2 hours before.',
+                'training25kmNutri3': '<strong>Post-Ride:</strong> Have a small snack with protein and carbs after.',
+                'training88kmTip1': '<strong>Build Endurance:</strong> Aim for 3-4 rides per week, focusing on "saddle time".',
+                'training88kmTip2': '<strong>The Long Ride:</strong> Gradually increase your weekend ride to 60-70km.',
+                'training88kmTip3': '<strong>Pacing is Key:</strong> Practice riding at a steady, sustainable pace. Don\'t start too fast.',
+                'training88kmTip4': '<strong>Hill Practice:</strong> Include some small hills in your training to build strength.',
+                'training88kmNutri1': '<strong>Carb-Load:</strong> Eat a carbohydrate-rich meal (like pasta or rice) the night before.',
+                'training88kmNutri2': '<strong>On-Bike Fuel:</strong> Bring energy gels, bananas, or energy bars. Eat small amounts every 45-60 mins.',
+                'training88kmNutri3': '<strong>Electrolytes:</strong> Use sports drinks with electrolytes, not just plain water.',
+                'training88kmNutri4': '<strong>Recovery Meal:</strong> Have a meal rich in protein and carbs within 90 minutes after finishing.',
+                'scheduleTitle': 'Race Day',
+                'scheduleTitleSched': 'Schedule',
+                'scheduleSubtitle1': 'Race Kit Collection',
+                'scheduleRPCDay1': 'Fri, 12 Dec 2025',
+                'scheduleRPCDay2': 'Sat, 13 Dec 2025',
+                'eventVenueShort': 'PKNS Sales Gallery',
+                'scheduleSubtitle2': 'Race Day: Sunday, 14 Dec 2025',
+                'scheduleItem1': 'Rider Check-in',
+                'scheduleLoc1': 'Main Tent',
+                'scheduleItem2': 'Welcome Speech & Briefing',
+                'scheduleLoc2': 'Starting Line',
+                'scheduleItem3': 'Flag Off',
+                'scheduleItem4': 'First Riders Arrive (Est.)',
+                'scheduleLoc3': 'Finish Line',
+                'scheduleItem5': 'Prize Giving & Lucky Draw',
+                'scheduleLoc4': 'Main Stage',
+                'scheduleItem6': 'Cut-off Time & Event Concludes',
+                'scheduleLoc5': 'Race Village',
+                'footerRights': '©2025 Official Unofficial SIR Fellowship Rider. Vibe coded with Sheikh Al Gemini Al Meruwiyyahi',
+                /* REMOVED MODAL KEYS
+                'modalTitle': 'Register Now',
+                'modalSubtitle': 'Choose your category to proceed. Prices shown are for Early Bird / Normal / Late fees.',
+                'modalPriceEarly': 'RM 78.00 (Early)',
+                'modalPriceNormal': 'RM 88.00 (Normal)',
+                'modalPriceLate': 'RM 98.00 (Late)',
+                */
+            },
+            'ms': { // Malay Translations
+                'navAbout': 'Tentang',
+                'navCategories': 'Kategori',
+                'navEntitlements': 'Hak Peserta',
+                'navSupport': 'Sokongan',
+                'navTraining': 'Latihan',
+                'navSchedule': 'Jadual',
+                'registerNow': 'Daftar Sekarang',
+                'heroTitle': 'PKNS Selangor<br class="hidden md:block"><span class="gradient-text">International Ride 2025</span>',
+                'heroSubtitle': 'Alami Keseronokan. Takluki Laluan Selangor.',
+                'countdownDays': 'Hari',
+                'countdownHours': 'Jam',
+                'countdownMins': 'Minit',
+                'countdownSecs': 'Saat',
+                'eventDate': '14 Disember 2025',
+                'eventVenue': 'Galeri Jualan PKNS, Cyber Valley, Cyberjaya',
+                'heroCta': 'Tempah Slot Anda',
+                'aboutTitle': 'Tentang',
+                'aboutTitleRide': 'Kayuhan',
+                'aboutDesc1': 'Selangor International Ride (SIR) 2025 adalah acara berbasikal terulung di rantau ini, menawarkan pengalaman bertaraf dunia di jalan raya tertutup sepenuhnya. Kami merapatkan jurang antara semangat amatur dan perlumbaan profesional.',
+                'aboutDesc2': 'Terokai laluan yang menakjubkan, dari dataran yang indah ke pendakian yang mencabar, semuanya dengan sokongan peringkat pro. Sertai ribuan penunggang untuk hari berbasikal, komuniti, dan pencapaian peribadi yang tidak dapat dilupakan.',
+                'statRide1': 'Kayuhan Fellowship',
+                'statRide2': 'Kayuhan Ria',
+                'statAge': 'Umur Minimum',
+                'statSupportVal': 'Pro',
+                'statSupport': 'Sokongan Konvoi',
+                'catTitle': 'Kategori',
+                'catTitleCats': 'Pendaftaran',
+                'catTableCat': 'Kategori',
+                'catTableDist': 'Jarak',
+                'catTableEarly': 'Harga Awal',
+                'catTableEarlyDate': '(14 Jul - 29 Ogs)',
+                'catTableNormal': 'Biasa',
+                'catTableNormalDate': '(30 Ogs - 14 Okt)',
+                'catTableLate': 'Lewat',
+                'catTableLateDate': '(15 Okt - 14 Nov)',
+                'catRide1Name': 'Kayuhan Fellowship',
+                'catRide2Name': 'Kayuhan Ria',
+                'catLimited': 'TERHAD',
+                'catFeeNote': '*Harga termasuk 8% yuran gerbang pembayaran dalam talian.',
+                'entTitle': 'Hak',
+                'entTitleEnt': 'Peserta',
+                'entJersey': 'Jersi Acara',
+                'entJerseyDesc': 'Pakaian lumba berkualiti tinggi',
+                'entMedal': 'Pingat Penamat',
+                'entMedalDesc': 'Ganjaran unik berkualiti tinggi',
+                'entTshirt': 'Baju-T Penamat',
+                'entTshirtDesc': 'Barangan acara eksklusif',
+                'entBag': 'Beg Serut',
+                'entBagDesc': 'Beg rasmi acara',
+                'entBib': 'Bib Lumba',
+                'entBibDesc': 'Nombor plat peribadi',
+                'entCert': 'E-Sijil',
+                'entCertDesc': 'Pencapaian boleh dimuat turun',
+                'entRefresh': 'Minuman',
+                'entRefreshDesc': 'Makanan ringan & minuman',
+                'entInsurance': 'Insurans Penunggang',
+                'entInsuranceDesc': 'Perlindungan kemalangan peribadi',
+                'supportTitle': 'Kayuh Seperti Pro:',
+                'supportTitleConvoy': 'Konvoi Penuh',
+                'supportDesc': "Ini bukan sekadar kayuhan; ia adalah acara yang diurus secara profesional. Kayuhan Fellowship 88KM akan diiringi sepenuhnya oleh konvoi peringkat negeri untuk memastikan keselamatan anda dan memberikan pengalaman yang lancar, sama seperti profesional.",
+                'supportItem1': '40 Motosikal Polis & Kereta Pandu',
+                'supportItem2': '20 Marshall Utama (Superbikes)',
+                'supportItem3': '40 Marshall Motosikal',
+                'supportItem4': '10 Pasukan Perubatan Bergerak & 4 Ambulans',
+                'supportItem5': '2 Kenderaan Servis Neutral (Mekanik)',
+                'supportItem6': '10 Kenderaan Penyapu (Pickup)',
+                'bikesTitle': 'Basikal yang',
+                'bikesTitleBikes': 'Sesuai',
+                'bikesDesc': 'Semua jenis basikal dialu-alukan! Pastikan basikal anda dalam keadaan baik. Umur minimum untuk menunggang adalah 15 tahun ke atas.',
+                'bike1': 'Basikal Gunung',
+                'bike2': 'Basikal Jalan Raya',
+                'bike3': 'Basikal Bandar / Cruiser',
+                'bike4': 'Basikal Touring',
+                'bike5': 'Basikal Elektrik',
+                'bike6': 'Basikal Lipat',
+                'bike7': 'Basikal Tandem',
+                'bike8': 'Basikal Fat',
+                'trainingTitle': 'Buat',
+                'trainingTitleReady': 'Persiapan',
+                'training25kmTitle': '25km Kayuhan Ria',
+                'training88kmTitle': '88km Kayuhan Fellowship',
+                'trainingSubTraining': 'Tips Latihan',
+                'trainingSubNutrition': 'Panduan Pemakanan',
+                'training25kmTip1': '<strong>Konsistensi > Intensiti:</strong> Sasarkan 2-3 kayuhan singkat (30-45 min) seminggu.',
+                'training25kmTip2': '<strong>Latih Kawalan:</strong> Biasakan diri dengan memulakan, berhenti, dan membelok.',
+                'training25kmTip3': '<strong>Kayuhan Jarak (Sekali):</strong> Cuba satu kayuhan lebih jauh 15-20km seminggu sebelum acara.',
+                'training25kmNutri1': '<strong>Hidrasi:</strong> Minum air sebelum dan semasa kayuhan. Satu botol sudah memadai.',
+                'training25kmNutri2': '<strong>Sarapan Ringan:</strong> Makan sarapan ringkas (cth: roti, pisang) 1-2 jam sebelum.',
+                'training25kmNutri3': '<strong>Pasca-Kayuhan:</strong> Ambil snek kecil dengan protein dan karbohidrat selepas itu.',
+                'training88kmTip1': '<strong>Bina Stamina:</strong> Sasarkan 3-4 kayuhan seminggu, fokus pada "masa di atas pelana".',
+                'training88kmTip2': '<strong>Kayuhan Jauh:</strong> Tingkatkan kayuhan hujung minggu anda secara beransur-ansur ke 60-70km.',
+                'training88kmTip3': '<strong>Kawal Pace:</strong> Berlatih mengayuh pada kadar yang stabil dan mampan. Jangan mula terlalu laju.',
+                'training88kmTip4': '<strong>Latihan Bukit:</strong> Masukkan beberapa bukit kecil dalam latihan anda untuk membina kekuatan.',
+                'training88kmNutri1': '<strong>Tambah Karbohidrat:</strong> Makan hidangan kaya karbohidrat (seperti pasta atau nasi) pada malam sebelumnya.',
+                'training88kmNutri2': '<strong>Bahan Api Semasa:</strong> Bawa gel tenaga, pisang, atau bar tenaga. Makan sedikit setiap 45-60 min.',
+                'training88kmNutri3': '<strong>Elektrolit:</strong> Gunakan minuman sukan dengan elektrolit, bukan hanya air kosong.',
+                'training88kmNutri4': '<strong>Makanan Pemulihan:</strong> Ambil hidangan kaya protein dan karbohidrat dalam masa 90 minit selepas tamat.',
+                'scheduleTitle': 'Jadual',
+                'scheduleTitleSched': 'Hari Lumba',
+                'scheduleSubtitle1': 'Pengambilan Kit Lumba',
+                'scheduleRPCDay1': 'Jum, 12 Dis 2025',
+                'scheduleRPCDay2': 'Sab, 13 Dis 2025',
+                'eventVenueShort': 'Galeri Jualan PKNS',
+                'scheduleSubtitle2': 'Hari Lumba: Ahad, 14 Dis 2025',
+                'scheduleItem1': 'Daftar Masuk Penunggang',
+                'scheduleLoc1': 'Khemah Utama',
+                'scheduleItem2': 'Ucapan Aluan & Taklimat',
+                'scheduleLoc2': 'Garisan Permulaan',
+                'scheduleItem3': 'Pelepasan',
+                'scheduleItem4': 'Penunggang Pertama Tiba (Ang.)',
+                'scheduleLoc3': 'Garisan Penamat',
+                'scheduleItem5': 'Penyampaian Hadiah & Cabutan Bertuah',
+                'scheduleLoc4': 'Pentas Utama',
+                'scheduleItem6': 'Masa Tamat & Acara Selesai',
+                'scheduleLoc5': 'Perkampungan Lumba',
+                'footerRights': '©2025 Official Unofficial SIR Fellowship Rider. Vibe coded with Sheikh Al Gemini Al Meruwiyyahi',
+                /* REMOVED MODAL KEYS
+                'modalTitle': 'Daftar Sekarang',
+                'modalSubtitle': 'Pilih kategori anda untuk meneruskan. Harga yang dipaparkan adalah untuk yuran Awal / Biasa / Lewat.',
+                'modalPriceEarly': 'RM 78.00 (Awal)',
+                'modalPriceNormal': 'RM 88.00 (Biasa)',
+                'modalPriceLate': 'RM 98.00 (Lewat)',
+                */
+            }
+        };
+
+        // --- UI Element References ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const header = document.getElementById('header');
+
+        // Language Buttons
+        const langBtn = document.getElementById('lang-btn');
+        const langDropdown = document.getElementById('lang-dropdown');
+        const langBtnText = document.getElementById('lang-btn-text');
+        const mobileLangBtn = document.getElementById('mobile-lang-btn');
+        const mobileLangDropdown = document.getElementById('mobile-lang-dropdown');
+        const mobileLangBtnText = document.getElementById('mobile-lang-btn-text');
+
+
+        // --- Mobile Menu Logic ---
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- Sticky Header Logic ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('glass-card', 'shadow-lg');
+            } else {
+                header.classList.remove('glass-card', 'shadow-lg');
+            }
+        });
+
+        // --- Modal Logic - REMOVED ---
+        /*
+        function openModal(modalId) {
+            ...
+        }
+        function closeModal(modalId) {
+            ...
+        }
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeModal('registerModal');
+        });
+        */
+
+        // --- Countdown Timer Logic ---
+        function startCountdown(targetDate) {
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const countdownEl = document.getElementById('countdown');
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    if (countdownEl) {
+                        countdownEl.innerHTML = '<h3 class="text-3xl font-bold gradient-text">The Ride is On!</h3>';
+                    }
+                    return;
+                }
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
+                if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+                if (minutesEl) minutesEl.innerText = String(minutes).padStart(2, '0');
+                if (secondsEl) secondsEl.innerText = String(seconds).padStart(2, '0');
+            }
+            updateCountdown();
+        }
+        const eventDate = new Date(2025, 11, 14, 7, 0, 0).getTime();
+        startCountdown(eventDate);
+
+
+        // --- Language Switcher Logic ---
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function setLanguage(lang) {
+            if (!content[lang]) lang = 'en'; // Default to English if lang not found
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+
+            // Update button text
+            const langUpper = lang.toUpperCase();
+            langBtnText.innerText = langUpper;
+            mobileLangBtnText.innerText = langUpper;
+
+            // Update all content
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.dataset.langKey;
+                const translation = content[lang][key] || content['en'][key]; // Fallback to English
+                if (translation) {
+                    // Use innerHTML to allow for <br> and <span> tags in content
+                    el.innerHTML = translation;
+                }
+            });
+
+            // Close dropdowns
+            langDropdown.classList.add('hidden');
+            mobileLangDropdown.classList.add('hidden');
+        }
+
+        // Toggle dropdowns
+        langBtn.addEventListener('click', () => langDropdown.classList.toggle('hidden'));
+        mobileLangBtn.addEventListener('click', () => mobileLangDropdown.classList.toggle('hidden'));
+        
+        // Handle language selection
+        [langDropdown, mobileLangDropdown].forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON' && e.target.dataset.lang) {
+                    setLanguage(e.target.dataset.lang);
+                }
+            });
+        });
+
+        // Close dropdowns if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+                langDropdown.classList.add('hidden');
+            }
+            if (!mobileLangBtn.contains(e.target) && !mobileLangDropdown.contains(e.target)) {
+                mobileLangDropdown.classList.add('hidden');
+            }
+        });
+        
+        // --- Initialization ---
+        function init() {
+            // Initialize Language
+            setLanguage(currentLang);
+        }
+
+        // Run all initialization logic on document load
+        document.addEventListener('DOMContentLoaded', init);
+
+    </script>
+
+</body>
+</html>
